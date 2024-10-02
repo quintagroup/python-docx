@@ -11,7 +11,7 @@ from __future__ import (
 
 from docx.image.bmp import Bmp
 from docx.image.gif import Gif
-from docx.image.jpeg import Exif, Jfif
+from docx.image.jpeg import Exif, Jfif, Dqt
 from docx.image.png import Png
 from docx.image.tiff import Tiff
 from docx.image.svg import Svg
@@ -19,6 +19,7 @@ from docx.image.svg import Svg
 
 SIGNATURES = (
     # class, offset, signature_bytes
+    (Dqt, 0, b'\xFF\xD8'),
     (Png,  0, b'\x89PNG\x0D\x0A\x1A\x0A'),
     (Jfif, 6, b'JFIF'),
     (Exif, 6, b'Exif'),

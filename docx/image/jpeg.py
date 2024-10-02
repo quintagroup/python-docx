@@ -7,6 +7,8 @@ sub-formats.
 
 from __future__ import absolute_import, division, print_function
 
+import PIL
+
 from ..compat import BytesIO
 from .constants import JPEG_MARKER_CODE, MIME_TYPE
 from .helpers import BIG_ENDIAN, StreamReader
@@ -71,6 +73,27 @@ class Jfif(Jpeg):
         px_height = markers.sof.px_height
         horz_dpi = markers.app0.horz_dpi
         vert_dpi = markers.app0.vert_dpi
+
+        return cls(px_width, px_height, horz_dpi, vert_dpi)
+
+
+class Dqt(Jpeg):
+    """
+    Image header parser for Jpeg with marker Dqt image format
+    """
+    @classmethod
+    def from_stream(cls, stream):
+        """
+        Create a Dqt instance from an image stream.
+
+        This method uses Pillow to open the image and extract its metadata.
+        It's particularly useful for JPEG images that don't conform to standard
+        JFIF or Exif formats but can still be processed by Pillow.
+
+        """
+        img = PIL.Image.open(stream)
+        px_width, px_height = img.size
+        horz_dpi, vert_dpi = img.info.get("dpi", (144, 144))
 
         return cls(px_width, px_height, horz_dpi, vert_dpi)
 
