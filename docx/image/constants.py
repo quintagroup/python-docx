@@ -103,6 +103,7 @@ class MIME_TYPE(object):
     PNG = 'image/png'
     TIFF = 'image/tiff'
     SVG = 'image/svg'
+    WEBP = 'image/webp'
 
 
 class PNG_CHUNK_TYPE(object):

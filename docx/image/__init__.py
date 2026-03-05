@@ -15,6 +15,7 @@ from docx.image.jpeg import Exif, Jfif, Dqt
 from docx.image.png import Png
 from docx.image.tiff import Tiff
 from docx.image.svg import Svg
+from docx.image.webp import Webp
 
 
 SIGNATURES = (
@@ -29,4 +30,5 @@ SIGNATURES = (
     (Tiff, 0, b'II*\x00'),  # little-endian (Intel) TIFF
     (Bmp,  0, b'BM'),
     (Svg, 0, b'<'),
+    (Webp, 0, b'RIFF'),
 )
